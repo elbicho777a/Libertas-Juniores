@@ -79,6 +79,22 @@
             transform: translateY(-5px);
         }
         /* gallery styles */
+        .player {
+            display: block;
+            overflow: hidden;
+            position: relative;
+        }
+        .player img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            float: left;
+            margin-right: 15px;
+        }
+        .player p {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -86,11 +102,14 @@
         <h1>Libertas Juniores</h1>
         <p>Giovani talenti, spirito di squadra</p>
     </header>
+    <!-- audio locale di stadio caricato -->
+    <audio id="stadiumAudio" src="assets/sounds/stadium_crowd.mp3" loop autoplay hidden></audio>
     <nav>
         <a href="#home">Home</a>
         <a href="#about">Chi siamo</a>
         <a href="#players">Giocatori</a>
         <a href="#contact">Contatti</a>
+        <button id="toggleSound" style="background:none;border:none;color:#fff;cursor:pointer;">🔊 Stadio</button>
     </nav>
     <main>
         <section id="home">
@@ -104,30 +123,37 @@
         <section id="players">
             <h2>Giocatori</h2>
             <div class="player">
+                <img src="https://eu-prod.asyncgw.teams.microsoft.com/v1/objects/0-weu-d11-e7c6712b953208c3d5fd38f5062c6dc4/views/imgpsh_fullsize" alt="Cristian Becattini">
                 <h3>Cristian Becattini</h3>
                 <p>Difensore centrale, noto per la sua forza fisica, abilità nel gioco aereo e leadership in campo. È un pilastro della retroguardia e guida i compagni con esperienza.</p>
             </div>
             <div class="player">
+                <img src="https://via.placeholder.com/150?text=TS" alt="Tommaso Senatori">
                 <h3>Tommaso Senatori</h3>
                 <p>Regista di centrocampo con grande visione di gioco e capacità di dettare i tempi. Ha un ottimo controllo palla e passaggi precisi.</p>
             </div>
             <div class="player">
+                <img src="https://eu-prod.asyncgw.teams.microsoft.com/v1/objects/0-weu-d13-627aaea6172b998384c0c6804be9a004/views/imgpsh_fullsize" alt="Alessandro Buzzichelli">
                 <h3>Alessandro Buzzichelli</h3>
                 <p>Ala rapida e tecnica, capace di creare superiorità sulle fasce. Il suo dribbling e i cross precisi sono fondamentali per l'attacco.</p>
             </div>
             <div class="player">
+                <img src="https://via.placeholder.com/150?text=RV" alt="Riccardo Vadi">
                 <h3>Riccardo Vadi</h3>
                 <p>Centrocampista box-to-box con grande resistenza e versatilità. Interviene in fase difensiva e contribuisce con inserimenti offensivi.</p>
             </div>
             <div class="player">
+                <img src="https://via.placeholder.com/150?text=YT" alt="Yuri Tafi">
                 <h3>Yuri Tafi</h3>
                 <p>Attaccante completo, dotato di fiuto del gol e movimentazione intelligente. È pericoloso in area e abile nel finalizzare le azioni.</p>
             </div>
             <div class="player">
+                <img src="https://via.placeholder.com/150?text=MG" alt="Michelangelo Giachi">
                 <h3>Michelangelo Giachi</h3>
                 <p>Terzino offensivo, bravo a spingere sulla fascia e crossare. Combina velocità e senso tattico per both copertura difensiva e supporto all'attacco.</p>
             </div>
             <div class="player">
+                <img src="https://via.placeholder.com/150?text=EM" alt="Elia Magazzini">
                 <h3>Elia Magazzini</h3>
                 <p>Portiere reattivo con ottimi riflessi e capacità di leggere la partita. È anche valido nelle uscite e nella costruzione dal basso.</p>
             </div>
@@ -157,6 +183,21 @@
                 sec.style.opacity = 0;
                 observer.observe(sec);
             });
+
+            // gestore audio
+            const audio = document.getElementById('stadiumAudio');
+            const btn = document.getElementById('toggleSound');
+            if (audio && btn) {
+                btn.addEventListener('click', () => {
+                    if (audio.paused) {
+                        audio.play();
+                        btn.textContent = '🔇 Stadio';
+                    } else {
+                        audio.pause();
+                        btn.textContent = '🔊 Stadio';
+                    }
+                });
+            }
         });
     </script>
 </body>
